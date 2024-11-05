@@ -1,31 +1,31 @@
-'use client'
-import useCartService from '@/lib/hooks/useCartStore'
-import useLayoutService from '@/lib/hooks/useLayout'
-import { signIn, signOut, useSession } from 'next-auth/react'
+"use client";
+import useCartService from "@/lib/hooks/useCartStore";
+import useLayoutService from "@/lib/hooks/useLayout";
+import { signIn, signOut, useSession } from "next-auth/react";
 
-import Link from 'next/link'
-import { useEffect, useState } from 'react'
-import { SearchBox } from './SearchBox'
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { SearchBox } from "./SearchBox";
 
 const Menu = () => {
-  const { items, init } = useCartService()
-  const [mounted, setMounted] = useState(false)
+  const { items, init } = useCartService();
+  const [mounted, setMounted] = useState(false);
   useEffect(() => {
-    setMounted(true)
-  }, [])
+    setMounted(true);
+  }, []);
 
   const signoutHandler = () => {
-    signOut({ callbackUrl: '/signin' })
-    init()
-  }
+    signOut({ callbackUrl: "/signin" });
+    init();
+  };
 
-  const { data: session } = useSession()
+  const { data: session } = useSession();
 
-  const { theme, toggleTheme } = useLayoutService()
+  const { theme, toggleTheme } = useLayoutService();
 
   const handleClick = () => {
-    ;(document.activeElement as HTMLElement).blur()
-  }
+    (document.activeElement as HTMLElement).blur();
+  };
 
   return (
     <>
@@ -39,7 +39,7 @@ const Menu = () => {
               Cart
               {mounted && items.length != 0 && (
                 <div className="bg-[#fbbf24] py-1 px-1 rounded-sm text-black text-xs md:text-base lg:text-base">
-                  {items.reduce((a, c) => a + c.qty, 0)}{' '}
+                  {items.reduce((a, c) => a + c.qty, 0)}{" "}
                 </div>
               )}
             </Link>
@@ -88,7 +88,7 @@ const Menu = () => {
                         href="/order-history"
                         className="text-sm md:text-base lg:text-base"
                       >
-                        Order history{' '}
+                        Order history{" "}
                       </Link>
                     </li>
                     <li onClick={handleClick}>
@@ -126,7 +126,7 @@ const Menu = () => {
         </ul>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Menu
+export default Menu;
